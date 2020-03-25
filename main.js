@@ -5,6 +5,9 @@ import Tiempo from "./tiempo";
 import Cliente from "./cliente";
 import Pedido from "./pedido";
 import ClienteFrecuente from "./clienteFrecuente";
+import ElementoPedido from "./elementoPedido";
+import Precio from "./precio";
+import Producto from "./producto";
 
 class main{
     constructor(){
@@ -43,7 +46,7 @@ class main{
 
         /*---------------------CLIENTE FRECUENTE---------------------*/
 
-        let clienteFrecuente = new ClienteFrecuente({
+        this._clienteFrecuente = new ClienteFrecuente({
             numeroCliente: 1,
             fechaResgistro: new Fecha(15,02,2012),
             nombre: "Kenia",
@@ -51,10 +54,62 @@ class main{
             telefono: 3141618781
         });
 
-        /*---------------------CLIENTE FRECUENTE---------------------*/
-
-
-
     }
 
+    testClienteFrecuente(){
+        console.log(this._clienteFrecuente.getPerfil());
+    }
+
+    añadirElementoPedido(){
+        let elementoPedido1 = new ElementoPedido(new Pedido("Pizza ppchampi", new Precio(65)), 4);
+        let elementoPedido2 = new ElementoPedido(new Pedido("Crepa de Nutella", new Precio(45.5)), 3);
+        this._pedido1.agregarElemento(elementoPedido1);
+        this._pedido1.agregarElemento(elementoPedido2);
+        this._pedido1.listarElementos();
+
+        let elementoPedido3 = new ElementoPedido(new Pedido("Pizza carnivora", new Precio(75)), 2);
+        let elementoPedido4 = new ElementoPedido(new Pedido("Brownie", new Precio(37.5)), 2);
+        this._pedido2.agregarElemento(elementoPedido3);
+        this._pedido2.agregarElemento(elementoPedido4);
+        this._pedido2.listarElementos();
+
+        let elementoPedido5 = new ElementoPedido(new Pedido("Ensalada de pollo", new Precio(55)), 3);
+        let elementoPedido6 = new ElementoPedido(new Pedido("Crepa de zarzamora", new Precio(40.5)), 4);
+        this._pedido3.agregarElemento(elementoPedido5);
+        this._pedido3.agregarElemento(elementoPedido6);
+        this._pedido3.listarElementos();
+    }
+
+    testPedido(){
+        console.log(this._pedido1.getResumen());
+        console.log(this._pedido2.getResumen());
+        console.log(this._pedido3.getResumen());
+    }
+
+    testRestaurante(){
+        let producto1  = new Producto("Clericot", 25);
+        let producto2  = new Producto("Refresco", 18);
+        let producto3  = new Producto("Pizza familiar", 99);
+
+        this._restaurante.registrarPedido(producto1);
+        this._restaurante.registrarPedido(producto2);
+        this._restaurante.registrarPedido(producto3);
+        this._restaurante.listarProductos();
+
+        console.log(this._restaurante.registrarPedido(this._pedido1));
+        console.log(this._restaurante.registrarPedido(this._pedido2));
+        console.log(this._restaurante.registrarPedido(this._pedido3));
+        console.log(this._restaurante.listarPedidos());
+
+        console.log(this._restaurante.actualizarPedidos(this._pedido1, this._pedido2));
+        this._restaurante.listarPedidos();
+
+        console.log(this._restaurante.eliminarPedido(this._pedido3));
+        this._restaurante.listarPedidos();
+    }
 }
+let app = new main();
+app.testClienteFrecuente();
+app.añadirElementoPedido();
+app.testPedido();
+app.testRestaurante();

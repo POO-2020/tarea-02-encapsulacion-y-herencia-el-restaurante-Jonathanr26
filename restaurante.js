@@ -10,9 +10,11 @@ import Precio from "./precio.js"
 export default class Restaurante {
     /**
      * 
-     * @param {string} nombre
-     * @param {string} telefono
-     * @param {string} direccion
+     * @param {string} nombre 
+     * @param {number} telefono 
+     * @param {Direccion} direccion 
+     * @param {Producto} productos
+     * @param {Pedido} pedidos
      */
     constructor(nombre, telefono, direccion) {
         this._nombre = nombre;
@@ -82,5 +84,4 @@ export default class Restaurante {
 
         return true;
     }
-
 }

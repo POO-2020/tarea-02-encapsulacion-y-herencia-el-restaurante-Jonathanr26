@@ -8,6 +8,6 @@ export default class Precio {
     }
   
     getPrecio() {
-      return '$' + new Intl.NumberFormat("en-US").format(parseFloat(this._valor).toFixed(2));
+      return '$' + new Intl.NumberFormat("en-US").format(this._valor);
     }
 }

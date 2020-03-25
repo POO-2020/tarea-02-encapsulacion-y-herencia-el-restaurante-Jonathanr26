@@ -1,13 +1,13 @@
-import Direccion from "./direccion";
-import Restaurante from "./restaurante";
-import Fecha from "./fecha";
-import Tiempo from "./tiempo";
-import Cliente from "./cliente";
-import Pedido from "./pedido";
-import ClienteFrecuente from "./clienteFrecuente";
-import ElementoPedido from "./elementoPedido";
-import Precio from "./precio";
-import Producto from "./producto";
+import Direccion from "./direccion.js";
+import Restaurante from "./restaurante.js";
+import Fecha from "./fecha.js";
+import Tiempo from "./tiempo.js";
+import Cliente from "./cliente.js";
+import Pedido from "./pedido.js";
+import ClienteFrecuente from "./clienteFrecuente.js";
+import ElementoPedido from "./elementoPedido.js";
+import Precio from "./precio.js";
+import Producto from "./producto.js";
 
 class main{
     constructor(){
@@ -22,7 +22,7 @@ class main{
         /*---------------------PEDIDOS---------------------*/
         
         let datosPedidos1 = {
-            fecha: new Fecha(23,03,2020),
+            fecha: new Fecha(23,3,2020),
             hora: new Tiempo(10,50,"PM"),
             cliente: new Cliente("Kenia", new Direccion("Esther Cardenas",1208, "SN","Punta Diamante", 28979, "Colima", "Villa de Alvarez")),
             numeroPedido: 1
@@ -31,14 +31,14 @@ class main{
         this._pedido1 = new Pedido(datosPedidos1);
 
         this._pedido2 = new Pedido({
-            fecha: new Fecha(22,03,2020),
+            fecha: new Fecha(22,3,2020),
             hora: new Tiempo(5,30, "PM"),
             Cliente: new Cliente("Wigetta", new Direccion("Apocalipsis", 4, "SN", "Minecraft", 777, "Andorra", "Andorra")),
             numeroPedido: 2
         })
 
         this._pedido3 = new Pedido({
-            fecha: new Fecha(21,03,2020),
+            fecha: new Fecha(21,3,2020),
             hora: new Tiempo(10,25,"AM"),
             cliente: new Cliente("Choko", new Direccion("Jumping Time", 69, "SN", "Zentralia", 28018, "Colima", "Colima")),
             numeroPedido: 3
@@ -48,12 +48,34 @@ class main{
 
         this._clienteFrecuente = new ClienteFrecuente({
             numeroCliente: 1,
-            fechaResgistro: new Fecha(15,02,2012),
+            fechaResgistro: new Fecha(15,2,2020),
             nombre: "Kenia",
             direccion: new Direccion("Esther Cardenas",1208, "SN","Punta Diamante", 28979, "Colima", "Villa de Alvarez"),
             telefono: 3141618781
         });
 
+    }
+
+    testRestaurante(){
+        let producto1  = new Producto("Clericot", 25);
+        let producto2  = new Producto("Refresco", 18);
+        let producto3  = new Producto("Pizza familiar", 50);
+
+        this._restaurante.registrarProductos(producto1);
+        this._restaurante.registrarProductos(producto2);
+        this._restaurante.registrarProductos(producto3);
+        this._restaurante.listarProductos();
+
+        console.log(this._restaurante.registrarPedido(this._pedido1));
+        console.log(this._restaurante.registrarPedido(this._pedido2));
+        console.log(this._restaurante.registrarPedido(this._pedido3));
+        this._restaurante.listarPedidos();
+
+        console.log(this._restaurante.actualizarPedidos(this._pedido1, this._pedido2));
+        this._restaurante.listarPedidos();
+
+        console.log(this._restaurante.eliminarPedido(this._pedido3));
+        this._restaurante.listarPedidos();
     }
 
     testClienteFrecuente(){
@@ -85,31 +107,11 @@ class main{
         console.log(this._pedido2.getResumen());
         console.log(this._pedido3.getResumen());
     }
-
-    testRestaurante(){
-        let producto1  = new Producto("Clericot", 25);
-        let producto2  = new Producto("Refresco", 18);
-        let producto3  = new Producto("Pizza familiar", 99);
-
-        this._restaurante.registrarPedido(producto1);
-        this._restaurante.registrarPedido(producto2);
-        this._restaurante.registrarPedido(producto3);
-        this._restaurante.listarProductos();
-
-        console.log(this._restaurante.registrarPedido(this._pedido1));
-        console.log(this._restaurante.registrarPedido(this._pedido2));
-        console.log(this._restaurante.registrarPedido(this._pedido3));
-        console.log(this._restaurante.listarPedidos());
-
-        console.log(this._restaurante.actualizarPedidos(this._pedido1, this._pedido2));
-        this._restaurante.listarPedidos();
-
-        console.log(this._restaurante.eliminarPedido(this._pedido3));
-        this._restaurante.listarPedidos();
-    }
 }
 let app = new main();
+/*
 app.testClienteFrecuente();
 app.añadirElementoPedido();
 app.testPedido();
+*/
 app.testRestaurante();

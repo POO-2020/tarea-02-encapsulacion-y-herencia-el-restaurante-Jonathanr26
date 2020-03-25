@@ -11,6 +11,7 @@ export default class Pedido {
      * @param {Fecha} fecha 
      * @param {Tiempo} hora 
      * @param {Cliente} cliente 
+     * @param {ElementoPedido} elementosPedidos
      */
     constructor(fecha, hora, cliente, numeroPedido) {
       this._fecha = fecha;

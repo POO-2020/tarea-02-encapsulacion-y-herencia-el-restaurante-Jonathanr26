@@ -20,11 +20,11 @@ export default class Restaurante {
         this._nombre = nombre;
         this._telefono = telefono;
         this._direccion = direccion;
-        this._productos = new Array();
-        this._pedidos = new Array();
+        this._productos = [];
+        this._pedidos = [];
     }
 
-    registrarProductos(producto) {
+    registrarProducto(producto) {
         this._productos.push(producto.getDescription());
     }
 
@@ -34,54 +34,57 @@ export default class Restaurante {
         });
     }
 
-    registrarPedido(pedido) {
-        if(this.buscarPedido(pedido) === undefined){
-            this._pedidos.push(pedido);
-            return true;
-        }
-        return false;
-    }
-
     listarPedidos() {
         this._pedidos.forEach((pedido, i) => {
             console.log(`${i} - ${pedido.getResumen()}`)
         })
     }
 
-    buscarPedido(pedido){
+    buscarIndice(pedido) {
         let resultado = this._pedidos.find(p => p.esIgualA(pedido));
 
         return resultado;
     }
 
-
-    buscarIndicePedido(pedido){
-        let indice = this._pedidos.findIndex(p => p.esIgualA(pedido));
-
-        return indice;
+    buscarPedido(pedido){
+        var resultado = null;
+        this._pedidos.forEach(ped => {
+            if (ped._numeroPedido === pedido._numeroPedido){
+                resultado = ped;
+            }
+        });
+        return resultado;
+    }
+    registrarPedido(pedido) {
+        if (this.buscarPedido(pedido) === undefined) {
+            this._pedidos.push(pedido);
+            return true;
+        }
+        return false;
     }
 
-    eliminarPedido(pedido){
-        let indice = this.buscarIndicePedido(pedido);
-
-        if(indice < 0){
+    eliminarPedido(pedido) {
+        var indice = -1;
+        this._pedidos.forEach((p, i) => {
+            if (pedido._numeroPedido === p._numeroPedido) {
+                indice = i;
+            }
+        });
+        if (indice < 0) {
             return false;
         }
-
-        this._pedidos.splice(indice,1);
-
+        this._pedidos.splice(indice, 1);
         return true;
     }
 
-    actualizarPedidos(pedido, nuevoPedido){
-        let indice = this.buscarIndicePedido(pedido);
+    modificarPedido(pedido, nuevoPedido) {
+        let index = this.buscarPedido(pedido);
 
-        if(indice < 0){
-            return false;
+        if (index < 0) {
+            return flase;
         }
 
-        this._pedidos.splice(indice, 1, nuevoPedido);
-
+        this._pedidos.splice(index, 1, nuevoPedido);
         return true;
     }
 }

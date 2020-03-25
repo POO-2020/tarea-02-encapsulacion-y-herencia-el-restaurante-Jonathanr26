@@ -12,6 +12,6 @@ export default class Producto{
   }
 
   getDescription() {
-    return `${this._nombre} ${this._precio.getPrecio()}`;
+    return `${this._nombre} ${"$" + new Intl.NumberFormat("en-US").format(this._precio)}`;
   }
 }

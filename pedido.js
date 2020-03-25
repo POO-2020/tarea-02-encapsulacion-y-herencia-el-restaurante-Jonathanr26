@@ -21,53 +21,33 @@ export default class Pedido {
       this._elementosPedidos = new Array();
     }
 
-    getNumeroPedido() {
-      return this._numeroPedido;
-    }
-  
-    esIgualA(pedido) {
-      if (pedido.getNumeroPedido() === this._numeroPedido) {
-        return true;
-      }
-      return false;
-    }
-  
-    getResumen() {
-      return `${this._fecha.getFecha()} ${this._hora.getFormato12()} 
-- ${this.getNumeroElementos()} elementos con ${this.getProductos()} productos - total: ${this.getCostoTotal()}  `
-    }
-  
-    getNumeroElementos() {
-      return this._elementosPedidos.length;
-    }
-  
-    getProductos() {
-      let x = 0;
+    getResumen(){
+      return `${this._fecha.getFecha()} ${this._hora.getFormato12()} Pedido No. ${this._numeroPedido} Un total de ${this.getNumeroElementos()} Elementos con ${this.getNumeroProductos()} productos total: ${this.getCostoTotal()}`;
+  }
+  getNumeroElementos(){
+      return (this._elementosPedidos.length);
+  }
+  getNumeroProductos(){
+      var nProductos = 0;
       this._elementosPedidos.forEach(elemento => {
-        x = elemento._cantidad + x
-      })
-  
-      return (x)
-    }
-  
-    getCostoTotal() {
-      let x = 0;
+          nProductos+=elemento._cantidad;
+      });
+      return nProductos;
+  }
+  getCostoTotal(){
+      var total = 0;
       this._elementosPedidos.forEach(elemento => {
-        x = (elemento._cantidad * elemento._producto._precio._valor) + x
+          total += elemento._cantidad * elemento._producto._precio._valor;
       });
-  
-      return new Precio(x).getPrecio();
-    }
-  
-  
-    agregarElemento(elemento) {
-      this._elementosPedidos.push(elemento);
-    }
-  
-    listarElementos() {
-      this._elementosPedidos.forEach((elemento, i) => {
-        console.log(`${i} - ${elemento.getDescripcion()}`)
+      return new Precio(total).getPrecio();
+
+  }
+  agregarElemento(elemento){
+      this._elementosPedidos.push(elemento)
+  }
+  listarElementos(){
+      this._elementosPedidos.forEach(elemento=>{
+          console.log(elemento.getDescripcion())
       });
-    }
-  
+  }
 }

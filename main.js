@@ -61,9 +61,9 @@ class main{
         let producto2  = new Producto("Refresco", 18);
         let producto3  = new Producto("Pizza familiar", 50);
 
-        this._restaurante.registrarProductos(producto1);
-        this._restaurante.registrarProductos(producto2);
-        this._restaurante.registrarProductos(producto3);
+        this._restaurante.registrarProducto(producto1);
+        this._restaurante.registrarProducto(producto2);
+        this._restaurante.registrarProducto(producto3);
         this._restaurante.listarProductos();
 
         console.log(this._restaurante.registrarPedido(this._pedido1));
@@ -71,9 +71,13 @@ class main{
         console.log(this._restaurante.registrarPedido(this._pedido3));
         this._restaurante.listarPedidos();
 
-        console.log(this._restaurante.actualizarPedidos(this._pedido1, this._pedido2));
+        console.log(this._restaurante.buscarPedido(this._pedido2));
+        console.log(this._restaurante.buscarPedido(this._pedido3));
+
+        console.log(this._restaurante.modificarPedido(this._pedido1, this._pedido3));
         this._restaurante.listarPedidos();
 
+        console.log(this._restaurante.eliminarPedido(this._pedido1));
         console.log(this._restaurante.eliminarPedido(this._pedido3));
         this._restaurante.listarPedidos();
     }
